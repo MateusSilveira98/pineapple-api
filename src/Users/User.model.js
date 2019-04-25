@@ -9,5 +9,6 @@ const UserSchema = new mongoose.Schema({
         default: Date.now
     }
 });
+UserSchema.set('toJSON', { virtuals: true });
 
 module.exports = mongoose.model('User', UserSchema);

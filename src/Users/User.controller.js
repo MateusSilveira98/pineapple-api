@@ -1,12 +1,19 @@
 const UserService = require('./User.service');
 
+const create = async (req, res) => {
+  const user = await UserService.create(req.body);
+  return res.json(user);
+}
+const edit = async (req, res) => {
+  const user = await UserService.edit(req.body);
+  return res.json(user);
+}
+const login = async (req, res) => {
+  const user = await UserService.login(req.body);
+  return res.json(user);
+}
 module.exports = {
-    async create(req, res) {
-        const user = await UserService.create(req.body);
-        return res.json(user);
-    },
-    async getAll(req, res) {
-        const user = await User.find();
-        return res.json(user);
-    },
+  create,
+  edit,
+  login
 };
