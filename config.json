@@ -1,0 +1,4 @@
+{
+    "connectionString": "mongodb+srv://wtt:Wtt-1234@cluster0-e53qt.mongodb.net/test?retryWrites=true",
+    "secret": "wtt:Wtt-1234@cluster0"
+}
