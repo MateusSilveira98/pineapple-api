@@ -13,7 +13,6 @@ const jwt = () => {
 }
 
 const isRevoked = async (req, payload, done) => {
-  console.log('isRevoked', payload)
   const user = await UserService.getById(payload.sub);
   if (!user) {
     return done(null, true);

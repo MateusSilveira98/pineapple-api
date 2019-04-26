@@ -8,19 +8,19 @@ const create = async (param) => {
   try {
     param.password = bcrypt.hashSync(param.password, 10);
     if (await UserModel.findOne({ email: param.email })) {
-      throw 'Email: "' + param.email + '" já existe!';
+      throw 'email já existe! :(';
     }
     await UserModel.create(param);
-    return Callbacks.callbackHandler('success', 'Usuário criado com sucesso! :)')
+    return Callbacks.callbackHandler('success', 'usuário criado com sucesso! :)')
   } catch (error) {
-    return { type: 'error', message: error }
+    return Callbacks.callbackHandler('error', error || 'falha ao cadastrar um usuário! :(')
   }
 }
 const edit = async (param) => {
   try {
     const user = await UserModel.findById(param.id);
 
-    if (!user) throw 'Usuário não encontrado';
+    if (!user) throw 'usuário não encontrado! :(';
 
     if (param.password) {
       param.password = bcrypt.hashSync(param.password, 10);
@@ -29,9 +29,9 @@ const edit = async (param) => {
     Object.assign(user, param);
 
     await user.save();
-    return Callbacks.callbackHandler('success', 'Usuário editado com sucesso! :)')
+    return Callbacks.callbackHandler('success', 'usuário editado com sucesso! :)')
   } catch (error) {
-    return Callbacks.callbackHandler('error', error || 'Falha ao editar o usuário! :(')
+    return Callbacks.callbackHandler('error', error || 'falha ao editar o usuário! :(')
   }
 }
 const login = async (param) => {
