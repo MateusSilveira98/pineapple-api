@@ -18,7 +18,7 @@ const create = async (param) => {
 }
 const edit = async (param) => {
   try {
-    const user = await UserModel.findById(param.id);
+    const user = await UserModel.findById(param.id || param._id);
 
     if (!user) throw 'usuário não encontrado! :(';
 
@@ -29,7 +29,7 @@ const edit = async (param) => {
     Object.assign(user, param);
 
     await user.save();
-    return Callbacks.callbackHandler('success', 'usuário editado com sucesso! :)')
+    return Callbacks.callbackHandler('success', 'usuário editado com sucesso! :)', user)
   } catch (error) {
     return Callbacks.callbackHandler('error', error || 'falha ao editar o usuário! :(')
   }
