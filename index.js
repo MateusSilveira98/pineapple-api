@@ -8,13 +8,6 @@ const Callbacks = require('./src/_Helpers/Callbacks');
 const JWT = require('./src/_Helpers/JWT');
 const Routes = require('./src/Routes');
 
-const corsOptions = {
-    origin: '*',
-    allowedHeaders: ['Content-Type', 'Authorization', 'Content-Length', 'X-Requested-With', 'Accept'],
-    methods: ['GET', 'PUT', 'POST', 'DELETE', 'OPTIONS'],
-    optionsSuccessStatus: 200
-};
-
 mongoose.connect(config.connectionString,
     {
         useNewUrlParser: true, useCreateIndex: true
@@ -22,7 +15,7 @@ mongoose.connect(config.connectionString,
 );
 
 
-app.use(cors(corsOptions));
+app.use(cors());
 app.use(express.json());
 app.use(JWT());
 app.use(Routes);
