@@ -2,7 +2,7 @@ const UserModel = require('./User.model');
 const Callbacks = require('../_Helpers/Callbacks');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const config = require('../../config.json');
+const config = require('../config.json');
 
 const create = async (param) => {
   try {
