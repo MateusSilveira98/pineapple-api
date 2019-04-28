@@ -8,7 +8,7 @@ const create = async (param) => {
       if (product.deleted) {
         Object.assign(product, param);
         product.deleted = false;
-        return await edit(product);
+        await product.save();
       } else throw 'este produto já existe! :('
     }
     await ProductModel.create(param);
@@ -19,15 +19,14 @@ const create = async (param) => {
 }
 const edit = async (param) => {
   try {
-    const product = param._id ? param : await ProductModel.findById(param.id);
-
+    const product = await ProductModel.findById(param._id);
     if (!product) throw 'produto não encontrado! :(';
     if (product.deleted) throw 'este produto foi excluído! :(';
 
     Object.assign(product, param);
 
     await product.save();
-    const text = param.deleted ? 'exluído' : (param._id ? 'criado' : 'editado');
+    const text = param.deleted ? 'exluído' : 'editado';
     return Callbacks.callbackHandler('success', `produto ${text} com sucesso! :)`)
   } catch (error) {
     return Callbacks.callbackHandler('error', error || 'falha ao editar o produto! :(')
@@ -35,7 +34,7 @@ const edit = async (param) => {
 }
 const getById = async (id) => {
   try {
-    const product = await ProductModel.findOne({id, deleted: false});
+    const product = await ProductModel.findById(id);
     if (product.deleted) throw 'este produto foi excluído! :(';
     return product
   } catch(error) {

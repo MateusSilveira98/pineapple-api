@@ -8,7 +8,7 @@ const edit = async (req, res) => {
   return res.json(product);
 }
 const getById = async (req, res) => {
-  const product = await ProductService.getById(req.param.id);
+  const product = await ProductService.getById(req.params.id);
   return res.json(product);
 }
 const getAll = async (req, res) => {
