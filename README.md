@@ -1,2 +1,7 @@
 # pineapple-api
-A products management 
+A node api that manage products and users; 
+
+## Set up
+ *node: 10.6.0;
+ *npm i: to install dependencies;
+ *npm start: to start application;
